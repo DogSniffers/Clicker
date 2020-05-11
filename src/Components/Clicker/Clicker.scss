@@ -1,0 +1,18 @@
+.clicker{
+    position: fixed;
+    width: 120px;
+    height: 120px;
+    margin-left: 50vw;
+    :hover{
+        cursor: pointer;
+    }
+    :active{
+        background-color: cyan;
+    }
+}
+.money{
+    position: fixed;
+    color: darkgreen;
+    top: 100px;
+    font-size: 100px;
+}
