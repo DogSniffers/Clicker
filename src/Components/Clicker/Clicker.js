@@ -1,6 +1,5 @@
 import React, {useState, useEffect} from 'react'
 import ProgressBar from '../ProgressBar/ProgressBar'
-import Store from '../Store/Store'
 import './Clicker.css'
 
 
@@ -10,13 +9,16 @@ function Clicker(){
 
     const [clickUpgrade,setClickUpgrade] = useState(1)
 
+    const [fillerMachine,setFillerMachine] = useState(1)
+
     const [fillerProgress, setFillerProgress] = useState(0)
     const [fillerProgressBar, setFillerProgressBar] = useState(25)
     const [progress,setProgress] = useState(10)
     const [fillerLevel, setFillerLevel] = useState(1)
 
+
     useEffect(() => {
-        if(fillerProgress === fillerProgressBar ){
+        if(fillerProgress >= fillerProgressBar ){
             setTotalEarnedMoney(totalEarnedMoney + fillerReward)
             //Gonna need more dummy data for this but for now, it will just set the ProgressBar to be +1 for simplicity in testing sake.
             setFillerProgress(0)
@@ -24,11 +26,15 @@ function Clicker(){
             setFillerLevel(fillerLevel + 1)
         }
         setProgress((fillerProgress/fillerProgressBar)*100)
-    })
+        console.log('hit')
 
+        
+    }, [fillerProgress])
+    
+   
 
     function click(){
-        if(fillerProgressBar > 0){
+        if(fillerProgress < fillerProgressBar){
             setFillerProgress(fillerProgress + 1)
         }
     }
@@ -55,9 +61,7 @@ function Clicker(){
             <ProgressBar percentage={progress}/>
         </div>
 
-        <div className='store'>
-            <Store money={totalEarnedMoney}/> 
-        </div>
+       
         </>
     )
 }
