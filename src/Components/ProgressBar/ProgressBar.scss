@@ -1,0 +1,10 @@
+.progressBar{
+    width: 20vw;
+    height: 2vw;
+    border: black 1px solid;
+}
+.filler{
+    height: 100%;
+    background-color: blue;
+    transition: width .1s ease-in;
+}

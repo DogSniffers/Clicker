@@ -1,4 +1,5 @@
 import React, {useState, useEffect} from 'react'
+import ProgressBar from '../ProgressBar/ProgressBar'
 import './Clicker.css'
 
 
@@ -8,43 +9,27 @@ function Clicker(){
 
     const [clickUpgrade,setClickUpgrade] = useState(1)
 
+    const [fillerProgress, setFillerProgress] = useState(0)
     const [fillerProgressBar, setFillerProgressBar] = useState(25)
-    const [fillerProgress, setFillerProgress] = useState(25)
+    const [progress,setProgress] = useState(10)
     const [fillerLevel, setFillerLevel] = useState(1)
 
     useEffect(() => {
-        if(fillerProgressBar <=0 ){
+        if(fillerProgress === fillerProgressBar ){
             setMoney(money + fillerReward)
             //Gonna need more dummy data for this but for now, it will just set the ProgressBar to be +1 for simplicity in testing sake.
-            const progressBar = fillerProgress + 1
-            setFillerProgressBar(progressBar)
-            setFillerProgress(progressBar)
+            setFillerProgress(0)
+            setFillerProgressBar(fillerProgressBar + 1)
             setFillerLevel(fillerLevel + 1)
         }
+        setProgress((fillerProgress/fillerProgressBar)*100)
+
     })
 
 
     function click(){
         if(fillerProgressBar > 0){
-            setFillerProgressBar(fillerProgressBar - clickUpgrade)
-        }
-    }
-
-    function buyClickUpgrade1(){
-        if(money >= 25){
-            setClickUpgrade(clickUpgrade + 4)
-            setMoney(money - 25)
-        }else{
-            alert(`You don't have enough money!`)
-        }
-    }
-
-    function buyClickUpgrade2(){
-        if(money >= 100){
-            setClickUpgrade(clickUpgrade + 5)
-            setMoney(money - 100)
-        }else{
-            alert(`You don't have enough money!`)
+            setFillerProgress(fillerProgress + 1)
         }
     }
     
@@ -53,20 +38,21 @@ function Clicker(){
         <div className='clicker'>
              <img src='https://icon2.cleanpng.com/20180410/kdq/kisspng-the-call-of-cthulhu-t-shirt-decal-sticker-logo-cthulhu-5accb53c6178f9.5007849915233651803993.jpg' alt='Necronomicon Symbol' onClick={() => click()}></img>
         </div>
+
         <div className='info'>
             <div>
                 {money}
             </div>
             <div>
-                {fillerProgressBar}
+                {fillerProgress}/{fillerProgressBar}
             </div>
             <div>
                 Filler Level Info:{fillerLevel}
             </div>
         </div>
-        
-       
-            <div>
+
+        <div className='progressBar'>
+            <ProgressBar percentage={progress}/>
         </div>
         </>
     )
