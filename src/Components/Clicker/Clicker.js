@@ -1,10 +1,11 @@
 import React, {useState, useEffect} from 'react'
 import ProgressBar from '../ProgressBar/ProgressBar'
+import Store from '../Store/Store'
 import './Clicker.css'
 
 
 function Clicker(){
-    const [money,setMoney] = useState(0)
+    const [totalEarnedMoney,setTotalEarnedMoney] = useState(0)
     const [fillerReward,setFillerReward] = useState(25)
 
     const [clickUpgrade,setClickUpgrade] = useState(1)
@@ -16,14 +17,13 @@ function Clicker(){
 
     useEffect(() => {
         if(fillerProgress === fillerProgressBar ){
-            setMoney(money + fillerReward)
+            setTotalEarnedMoney(totalEarnedMoney + fillerReward)
             //Gonna need more dummy data for this but for now, it will just set the ProgressBar to be +1 for simplicity in testing sake.
             setFillerProgress(0)
             setFillerProgressBar(fillerProgressBar + 1)
             setFillerLevel(fillerLevel + 1)
         }
         setProgress((fillerProgress/fillerProgressBar)*100)
-
     })
 
 
@@ -41,7 +41,7 @@ function Clicker(){
 
         <div className='info'>
             <div>
-                {money}
+                {totalEarnedMoney}
             </div>
             <div>
                 {fillerProgress}/{fillerProgressBar}
@@ -53,6 +53,10 @@ function Clicker(){
 
         <div className='progressBar'>
             <ProgressBar percentage={progress}/>
+        </div>
+
+        <div className='store'>
+            <Store money={totalEarnedMoney}/> 
         </div>
         </>
     )
