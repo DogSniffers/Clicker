@@ -1,22 +1,32 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import Button from '@material-ui/core/Button'
 import './Clicker.css'
 
 
 function Clicker(){
     const [money,setMoney] = useState(0)
-    const [clickUpgrade,setClickUpgrade] = useState(0)
-    const [clickUpgradeMax,setClickUpgradeMax] = useState(false)
-    const [filler1,setFiller1] = useState(1)
+    const [fillerReward,setFillerReward] = useState(25)
 
+    const [clickUpgrade,setClickUpgrade] = useState(1)
 
-    // setInterval(() => {
-    //     setMoney(money + (filler1*10))
+    const [fillerProgressBar, setFillerProgressBar] = useState(25)
+    const [fillerProgress, setFillerProgress] = useState(25)
 
-    // }, 5000)
+    useEffect(() => {
+        if(fillerProgressBar <=0 ){
+            setMoney(money + fillerReward)
+            //Gonna need more dummy data for this \/ But for now, it will just set the ProgressBar to be +5 for simplicity in testing sake.
+            const progressBar = fillerProgress + 5
+            setFillerProgressBar(progressBar)
+            setFillerProgress(progressBar)
+        }
+    })
+
 
     function click(){
-        setMoney(money+1+clickUpgrade)
+        if(fillerProgressBar > 0){
+            setFillerProgressBar(fillerProgressBar - clickUpgrade)
+        }
     }
 
     function buyClickUpgrade1(){
@@ -44,37 +54,12 @@ function Clicker(){
         </div>
         <div className='money'>
             {money}
+            <div>
+            {fillerProgressBar}
+            </div>
         </div>
-        <div className='store'>
-            <h2>Store</h2>
+       
             <div>
-                <p>Upgrades:</p>
-                {clickUpgrade === 0?(
-                <div>
-                    $25<Button onClick={() => buyClickUpgrade1()}>Click Upgrade 1</Button>
-                </div>
-
-                ):(
-                    null
-                )}
-                {clickUpgrade === 4?(
-                <div>
-                    $100<Button onClick={() => buyClickUpgrade2()}>Click Upgrade 2</Button>
-                </div>
-
-                ):(
-                    null
-                )}
-                {clickUpgradeMax === true?(
-                    <p>No more Available Upgrades!</p>
-
-                ):(
-                    null
-                )}
-            </div>
-            <div>
-
-            </div>
         </div>
         </>
     )
