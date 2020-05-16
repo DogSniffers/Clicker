@@ -7,13 +7,10 @@ function Clicker(){
     const [totalEarnedMoney,setTotalEarnedMoney] = useState(0)
     const [fillerReward,setFillerReward] = useState(25)
 
-    const [clickUpgrade,setClickUpgrade] = useState(1)
-
-    const [fillerMachine,setFillerMachine] = useState(1)
-
     const [fillerProgress, setFillerProgress] = useState(0)
     const [fillerProgressBar, setFillerProgressBar] = useState(25)
     const [progress,setProgress] = useState(10)
+
     const [fillerLevel, setFillerLevel] = useState(1)
 
 
@@ -25,14 +22,13 @@ function Clicker(){
             setFillerProgressBar(fillerProgressBar + 1)
             setFillerLevel(fillerLevel + 1)
         }
-        setProgress((fillerProgress/fillerProgressBar)*100)
+        setProgress(((fillerProgress)/fillerProgressBar)*100)
         console.log('hit')
 
         
     }, [fillerProgress])
-    
-   
 
+    
     function click(){
         if(fillerProgress < fillerProgressBar){
             setFillerProgress(fillerProgress + 1)
