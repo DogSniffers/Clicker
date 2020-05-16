@@ -1,10 +1,10 @@
 import React from 'react';
-import Page from './Components/Page/Page'
+import Clicker from './Components/Clicker/Clicker'
 import './App.css';
 
 function App() {
   return (
-    <Page/>
+    <Clicker/>
    
   );
 }

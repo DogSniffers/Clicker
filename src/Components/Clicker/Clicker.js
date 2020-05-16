@@ -1,5 +1,4 @@
 import React, {useState, useEffect} from 'react'
-import Button from '@material-ui/core/Button'
 import './Clicker.css'
 
 
@@ -11,14 +10,16 @@ function Clicker(){
 
     const [fillerProgressBar, setFillerProgressBar] = useState(25)
     const [fillerProgress, setFillerProgress] = useState(25)
+    const [fillerLevel, setFillerLevel] = useState(1)
 
     useEffect(() => {
         if(fillerProgressBar <=0 ){
             setMoney(money + fillerReward)
-            //Gonna need more dummy data for this \/ But for now, it will just set the ProgressBar to be +5 for simplicity in testing sake.
-            const progressBar = fillerProgress + 5
+            //Gonna need more dummy data for this but for now, it will just set the ProgressBar to be +1 for simplicity in testing sake.
+            const progressBar = fillerProgress + 1
             setFillerProgressBar(progressBar)
             setFillerProgress(progressBar)
+            setFillerLevel(fillerLevel + 1)
         }
     })
 
@@ -50,14 +51,20 @@ function Clicker(){
     return(
         <>
         <div className='clicker'>
-             <img src='https://static.thenounproject.com/png/185253-200.png' alt='Money' onClick={() => click()}></img>
+             <img src='https://icon2.cleanpng.com/20180410/kdq/kisspng-the-call-of-cthulhu-t-shirt-decal-sticker-logo-cthulhu-5accb53c6178f9.5007849915233651803993.jpg' alt='Necronomicon Symbol' onClick={() => click()}></img>
         </div>
-        <div className='money'>
-            {money}
+        <div className='info'>
             <div>
-            {fillerProgressBar}
+                {money}
+            </div>
+            <div>
+                {fillerProgressBar}
+            </div>
+            <div>
+                Filler Level Info:{fillerLevel}
             </div>
         </div>
+        
        
             <div>
         </div>
